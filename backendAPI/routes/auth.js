@@ -29,7 +29,7 @@ router.post("/login",async (req,res)=>{
         // console.log(user);
         // !user && res.status(401).json("Wrong Credentials");
 
-        const hashedpassword=CryptoJS.AES.decrypt(user.password,"123456");
+        const hashedpassword=CryptoJS.AES.decrypt(user.password,process.env.SEC_PASS);
         // console.log(password);
         const password=hashedpassword.toString(CryptoJS.enc.Utf8);
 
