@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function CartProduct(props){
     // console.log('CartProduct',props.cartItem);
+    const [remove,setRemove] = useState(false);
     const [product,setProduct] = useState();
 
     useEffect(()=>{
@@ -10,6 +11,17 @@ export default function CartProduct(props){
         .then((res)=>setProduct(res.data))
         .catch((err)=>console.log(err.message))
     },[])
+
+    // WORKS IN POSTMAN BUT NOT IN FRONTEND?
+    useEffect(()=>{
+        if(product!=undefined){
+            axios.delete(`${props.apiURL}/api/cart/${props.cartId}`,{
+                productId: `${product._id}`
+            })
+            // .then((res)=>console.log(res))
+            .catch((err)=>console.log(err.message))
+        }
+    },[remove])
     // console.log(product)
 
     return (
@@ -19,8 +31,8 @@ export default function CartProduct(props){
             <td>{product?.head}</td>
             <td>{product?.price}</td>
             <td><input type="number" defaultValue={props.cartItem.quantity} /></td>
-            <td>{`${(product?.price)*2}`}</td>
-            <td><button>remove</button></td>
+            <td>{`${(product?.price*props.cartItem.quantity)}`}</td>
+            <td><button onClick={()=>setRemove(!remove)}>remove</button></td>
         </tr>
     )
 }

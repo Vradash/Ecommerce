@@ -15,6 +15,7 @@ function App() {
                         <li><NavLink to="/about">About</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
                         <li><NavLink to="/cart"><i className="fa fa-shopping-cart"></i></NavLink></li>
+                        {/* <li><NavLink to="/cart"><i className="fa-regular fa-bars"></i></NavLink></li> */}
                     </ul>
                 </div>
             </section>

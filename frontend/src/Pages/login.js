@@ -27,7 +27,7 @@ export default function Login(props){
             email: userData.email,
             password: userData.password,
         })
-        .then((res)=>console.log(res))
+        .then((res)=>alert("Registered successfully"))
         .catch((err)=>console.log(err.message)) 
     },[onSubmit])
     
@@ -38,7 +38,7 @@ export default function Login(props){
             password: userData.password,
         })
         .then((res)=>props.func(res))
-        .catch((err)=>console.log(err.message))
+        .catch((err)=>{alert("Please register yourself")})
     },[onLogIn])
 
     const handleSubmit=()=>{

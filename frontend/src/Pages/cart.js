@@ -7,20 +7,29 @@ export default function Cart(props){
         window.scrollTo(0, 0);
     },[]);
 
-    const [userCart,setuserCart]= useState();
+    const [userCart,setuserCart]= useState(null);
+
+    useEffect(()=>{
+        axios.post(`${props.apiURL}/api/cart`,{
+            userId: `${props.id}`,
+        })
+        // .then((res)=>console.log(res.data))
+        .catch((err)=>console.log(err))
+    },[])
+
     useEffect(()=>{
         axios.get(`${props.apiURL}/api/cart/${props.id}`)
         .then((res)=>setuserCart(res.data))
         .catch((err)=>console.log(err))
     },[])
 
-    useEffect(()=>{
-        if(userCart===null){
-            axios.get(`${props.apiURL}/api/cart`)
-            .then((res)=>setuserCart(res.data))
-            .catch((err)=>console.log(err))
-        }
-    },[])
+    // useEffect(()=>{
+    //     if(userCart===null){
+    //         axios.get(`${props.apiURL}/api/cart`)
+    //         .then((res)=>setuserCart(res.data))
+    //         .catch((err)=>console.log(err))
+    //     }
+    // },[])
 
     // console.log(userCart);
     // console.log(props.id);
@@ -49,7 +58,12 @@ export default function Cart(props){
 
                 <tbody>
                     {userCart?.products.map((item)=>{
-                            return (<CartItem key={item.productId} cartItem={item} apiURL={props.apiURL}/>);
+                            return (<CartItem 
+                            key={item.productId} 
+                            cartItem={item} 
+                            apiURL={props.apiURL}
+                            cartId={userCart._id}
+                            />);
                     })}
                 </tbody>
             </table>

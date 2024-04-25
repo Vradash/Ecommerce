@@ -48,6 +48,7 @@ export default function Blog(props){
         .catch(err => console.log(err));
     },[category,company]);
 
+    // console.log("data",data)
     // console.log(category,company);
     return (
         <div id="shop-products">
@@ -78,20 +79,10 @@ export default function Blog(props){
                             {/* <li>Acer</li> */}
                         </ul>
                     </div>
-                    
-                    <div>
-                        <select id="">
-                            <option value="red">red</option>
-                            <option value="blue">blue</option>
-                            <option value="black">black</option>
-                        </select>  
-                    </div>
-                    
-
                 </div>
             </div>
             <div className="product1">
-                {data.map(createCard)}
+                {(data.length)? data.map(createCard):<h3>No products match the filter</h3>}
             </div>
         </div>
     )

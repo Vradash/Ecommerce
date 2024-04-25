@@ -26,7 +26,7 @@ export default function Product(props){
     useEffect(()=>{
         if(productData!==undefined){
             axios.put(`${props.apiURL}/api/cart/find/${props.id}`,{
-                products:{productId: `${productData?._id}`} 
+                products:{productId: `${productData._id}`} 
             })
             .then((res)=>{alert("Added to Cart")})
             .catch((err)=>console.log(err))
