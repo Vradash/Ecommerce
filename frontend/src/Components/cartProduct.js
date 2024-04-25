@@ -6,7 +6,7 @@ export default function CartProduct(props){
     const [product,setProduct] = useState();
 
     useEffect(()=>{
-        axios.get(`/api/product/find/${props.cartItem.productId}`)
+        axios.get(`${props.apiURL}/api/product/find/${props.cartItem.productId}`)
         .then((res)=>setProduct(res.data))
         .catch((err)=>console.log(err.message))
     },[])
@@ -19,7 +19,7 @@ export default function CartProduct(props){
             <td>{product?.head}</td>
             <td>{product?.price}</td>
             <td><input type="number" defaultValue={props.cartItem.quantity} /></td>
-            <td>{(product?.price)*2}</td>
+            <td>{`${(product?.price)*2}`}</td>
             <td><button>remove</button></td>
         </tr>
     )

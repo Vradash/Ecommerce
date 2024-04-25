@@ -24,7 +24,7 @@ function createCard(temp){
 //     console.log(val.toLowerCase());
 // }
 
-export default function Blog(){
+export default function Blog(props){
     useEffect(()=>{
         window.scrollTo(0, 0);
     },[]);
@@ -43,7 +43,7 @@ export default function Blog(){
     }
 
     useEffect(() => {
-        axios.get(`/api/product?category=${category}&company=${company}`)
+        axios.get(`${props.apiURL}/api/product?category=${category}&company=${company}`)
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     },[category,company]);

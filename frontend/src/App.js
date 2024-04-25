@@ -19,7 +19,10 @@ import './App.css';
 
 function App() {
   const [user,setUser]= useState();
+
   // const [userCart,setuserCart]= useState();
+  const api=process.env.REACT_APP_API_URL;
+  // console.log(api);
 
   const userData=(data)=>{
     setUser(data?.data);
@@ -29,7 +32,7 @@ function App() {
   // console.log(user?.data);
   
   if(!user){
-    return <Login func={userData}/>
+    return <Login func={userData} apiURL={api}/>
   }
   else{
     return (
@@ -39,13 +42,13 @@ function App() {
           <Navbar />{/*This is placed here so that it is considered a router component 
           else the navlink in navbar doesnt work*/}
           <Routes>
-            <Route index element={<Home />}/>
+            <Route index element={<Home apiURL={api}/>}/>
             {/* <Route path='/home' element={<Home />}/> */}
             <Route path='/about' element={<About />}/>
             <Route path='/contact' element={<Contact />}/>
-            <Route path='/shop' element={<Shop />}/>
-            <Route path='/cart' element={<Cart id={user._id}/>}></Route>
-            <Route path='/product' element={<Product id={user._id}/>}></Route>
+            <Route path='/shop' element={<Shop apiURL={api}/>}/>
+            <Route path='/cart' element={<Cart id={user._id} apiURL={api}/>}></Route>
+            <Route path='/product' element={<Product id={user._id} apiURL={api}/>}></Route>
             {/* <Route path='/navlink' element={<Navbar />}></Route> */}
           </Routes>
         </BrowserRouter>

@@ -22,17 +22,17 @@ export default function Login(props){
     // console.log(userData)
 
     useEffect(() => {
-        axios.post("https://ecommerce-l768.onrender.com/api/auth/register",{
+        axios.post(`${props.apiURL}/api/auth/register`,{
             username: userData.username,
             email: userData.email,
             password: userData.password,
         })
         .then((res)=>console.log(res))
-        .catch((err)=>console.log(err.message))
+        .catch((err)=>console.log(err.message)) 
     },[onSubmit])
     
     useEffect(() => {
-        axios.post("https://ecommerce-l768.onrender.com/api/auth/login",{
+        axios.post(`${props.apiURL}/api/auth/login`,{
             username: userData.username,
             // email: "",
             password: userData.password,

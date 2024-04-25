@@ -1,11 +1,7 @@
 import { useState , useEffect } from 'react';
 import axios from 'axios';
-// import { NavLink } from 'react-router-dom';
-
 import Feature from "../Components/featureCard.js";
 import ProductCard from '../Components/productCards.js';
-// import info from '../Components/productCardsarr.js';
-// import newArrivals from '../Components/newArrivalsarr.js';
 
 function createCard(temp){
     return (
@@ -13,26 +9,13 @@ function createCard(temp){
       key={temp._id}
       id={temp._id}
       cardImg={temp.img[0]}
-    //   cardComp={temp.cardComp}
       cardName={temp.head}
       cardPrice={temp.price}/>
     );
 };
 
-
-// function createCard(temp){
-//     return (
-//       <ProductCard 
-//       key={temp.id}
-//       cardImg={temp.cardImg}
-//       cardComp={temp.cardComp}
-//       cardName={temp.cardName}
-//       cardPrice={temp.cardPrice}/>
-//     );
-// };
-
 //If u write home instead of Home, the function isnt considered an react component
-function Home(){
+function Home(props){
 
     const [data,setData] = useState([]);
 
@@ -41,7 +24,7 @@ function Home(){
     },[]);
 
     useEffect(() => {
-        axios.get("/api/product")
+        axios.get(`${props.apiURL}/api/product`)
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     },[]);
@@ -70,7 +53,7 @@ function Home(){
         <section id="products" className="section1">
             <h1 id="abtitle">Featured Products</h1>
             <div className="product1">
-            {data.slice(0,8).map(createCard)}
+            {data?.slice(0,8).map(createCard)}
             </div>
         </section>
         
@@ -83,7 +66,7 @@ function Home(){
         <section id="products" className="section1">
             <h1 id="abtitle">New Arrivals</h1>
             <div className="product1">
-            {data.slice(8,16).map(createCard)}
+            {data?.slice(8,16).map(createCard)}
             </div>
         </section>
 

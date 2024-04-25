@@ -14,7 +14,7 @@ export default function Product(props){
     const { state } = useLocation();
 
     useEffect(()=>{
-        axios.get('/api/product/find/'+state)
+        axios.get(`${props.apiURL}/api/product/find/`+state)
         .then(res=>setData(res.data))
         .catch((err)=>console.log(err));
     },[state]);
@@ -25,7 +25,7 @@ export default function Product(props){
     
     useEffect(()=>{
         if(productData!==undefined){
-            axios.put(`/api/cart/find/${props.id}`,{
+            axios.put(`${props.apiURL}/api/cart/find/${props.id}`,{
                 products:{productId: `${productData?._id}`} 
             })
             .then((res)=>{alert("Added to Cart")})
