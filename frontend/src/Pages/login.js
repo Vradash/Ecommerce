@@ -22,7 +22,7 @@ export default function Login(props){
     // console.log(userData)
 
     useEffect(() => {
-        axios.post("http://localhost:5000/api/auth/register",{
+        axios.post("https://ecommerce-l768.onrender.com/api/auth/register",{
             username: userData.username,
             email: userData.email,
             password: userData.password,
@@ -32,7 +32,7 @@ export default function Login(props){
     },[onSubmit])
     
     useEffect(() => {
-        axios.post("http://localhost:5000/api/auth/login",{
+        axios.post("https://ecommerce-l768.onrender.com/api/auth/login",{
             username: userData.username,
             // email: "",
             password: userData.password,
