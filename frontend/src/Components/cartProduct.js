@@ -11,17 +11,31 @@ export default function CartProduct(props){
         .then((res)=>setProduct(res.data))
         .catch((err)=>console.log(err.message))
     },[])
-
+    
     // WORKS IN POSTMAN BUT NOT IN FRONTEND?
-    useEffect(()=>{
-        if(product!=undefined){
-            axios.delete(`${props.apiURL}/api/cart/${props.cartId}`,{
+    // useEffect(()=>{
+    //     if(product!=undefined){
+    //         axios.delete(`${props.apiURL}/api/cart/${props.cartId}`,{
+    //             productId: `${product._id}`
+    //         })
+    //         // .then((res)=>console.log(res))
+    //         .catch((err)=>console.log(err.message))
+    //     }
+    // },[remove])
+    //Postman allows delete request with body but axios doesn't
+    useEffect(() => {
+    if (product != undefined) {
+        axios.request({
+            method: 'delete',
+            url: `${props.apiURL}/api/cart/${props.cartId}`,
+            data: {
                 productId: `${product._id}`
-            })
-            // .then((res)=>console.log(res))
-            .catch((err)=>console.log(err.message))
-        }
-    },[remove])
+            }
+        })
+        .then((res) => alert('Product removed from cart'))
+        .catch((err) => console.log(err.message))
+    }
+}, [remove])
     // console.log(product)
 
     return (
