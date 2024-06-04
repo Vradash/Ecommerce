@@ -11,7 +11,6 @@ router.post("/",async (req,res)=>{
     }catch(err){
         res.status(500).json(err);
     }
-    // req.statusCode(200).json({"nothing": nothing2})
 });
 
 //UPDATE
@@ -19,12 +18,10 @@ router.put("/find/:userId",async(req,res)=>{
     try{
         const updatedCart=await Cart.findOneAndUpdate(
             {userId: `${req.params.userId}`},
-            // req.params.id,
             {
                 $addToSet: req.body
             },
-            {new: true}
-            //returns the mofified value as output
+            {new: true}//returns the mofified value as output
         )
         res.status(200).json(updatedCart);
     }catch(err){
@@ -42,8 +39,6 @@ router.delete("/:id",async(req,res)=>{
             }
         )
         res.status(200).json(deletedCart);
-        // await Cart.findByIdAndDelete(req.params.id);
-        // res.status(200).json("Product is deleted");
     }catch(err){
         res.status(500).json(err);
     }
@@ -53,7 +48,6 @@ router.delete("/:id",async(req,res)=>{
 router.get("/:userId",async(req,res)=>{
     try{
         const cart=await Cart.findOne({userId: `${req.params.userId}`});
-        // const cart=await Cart.findById(req.params.userId);
         res.status(200).json(cart);
     }catch(err){
         res.status(500).json(err);
