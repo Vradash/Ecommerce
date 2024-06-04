@@ -8,15 +8,12 @@ router.post("/register",async (req,res)=>{
         email: req.body.email,
         password: CryptoJS.AES.encrypt(req.body.password,process.env.SEC_PASS).toString()
     });
-    // const newUser= new User(req.body);
 
     try{
         const savedUser=await newUser.save();
         res.status(201).json(savedUser);
-        // console.log(savedUser);
     }catch(err){
         res.status(500).json(err);
-        // console.log(err);
     }
 });
 
@@ -26,18 +23,9 @@ router.post("/register",async (req,res)=>{
 router.post("/login",async (req,res)=>{
     try{
         const user=await User.findOne({username: req.body.username});
-        // console.log(user);
-        // !user && res.status(401).json("Wrong Credentials");
-
         const hashedpassword=CryptoJS.AES.decrypt(user.password,process.env.SEC_PASS);
-        // console.log(password);
         const password=hashedpassword.toString(CryptoJS.enc.Utf8);
 
-        // password!==req.body.password && 
-        // res.status(401).json("Wrong Credentials");
-        // res.status(200).json(user);
-
-        
         if(!user || password!==req.body.password){
             res.status(401).json("Wrong Credentials");
         }
