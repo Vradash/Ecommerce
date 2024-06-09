@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('#navbar');
+
+
 function App() {
+    // const [isOpen, setIsOpen] = useState(false);
     return (
         <>
             <section id="header">
                 {/*  <a href='#'>logo</a>  */}
                 <Link to='/'><img src="images/logo123.png" alt="Unable to load " /></Link>
+
+                <div className="hamburger" onClick={() =>nav.classList?.toggle('open')}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
 
                 <div>
                     <ul id="navbar">
