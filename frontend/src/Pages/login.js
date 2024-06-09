@@ -15,11 +15,8 @@ export default function Login(props){
     const handleInput=(e)=>{
         const name=e.target.name;
         const value=e.target.value.toString();
-        // console.log(name,value)
-        setUserData({...userData,[name]: value});
-        //writing in brackets means im adding dynamic data
+        setUserData({...userData,[name]: value});//writing in brackets means im adding dynamic data
     }
-    // console.log(userData)
 
     useEffect(() => {
         axios.post(`${props.apiURL}/api/auth/register`,{
