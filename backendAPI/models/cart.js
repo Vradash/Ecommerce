@@ -4,8 +4,8 @@ const CartSchema= new mongoose.Schema(
     {
         userId: {type: String, required: true, unique: true},
         products: [
-            {   _id: false,//when using addToSet even if productId is same it adds another array Object cuz each object generates with different Id
-                // So turning id propety off the objects do not duplicate as long as their contents are same 
+            {   _id: false,                                                                                                         //when using addToSet even if productId is same it adds another array Object cuz each object generates with different Id
+                                                                                                                                                            // So turning id propety off the objects do not duplicate as long as their contents are same 
                 productId:{type:String,required: true},
                 quantity:{type:Number,default:1}
             }
